@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
-    object {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabriel's Resume</title>
+    <style>
+        /* This ensures the PDF takes up the entire browser window */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Prevents double scrollbars */
+            background-color: #525659; /* Matches the default PDF viewer background */
+        }
+
+        #pdf-container {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
 
-  <object data="https://github.com/GabrielYuSP/CV/raw/f0196a04d69410755ea8413fde23b11b85aea86f/Resume.pdf" type="application/pdf">
-    <p>It appears you don't have a PDF plugin for this browser. 
-       No biggie! You can <a href="https://github.com/GabrielYuSP/CV/raw/f0196a04d69410755ea8413fde23b11b85aea86f/Resume.pdf">click here to download the PDF file.</a></p>
-  </object>
+    <object 
+        data="https://gabrielyusp.github.io/CV/Resume.pdf" 
+        type="application/pdf" 
+        id="pdf-container">
+        
+        <embed src="https://gabrielyusp.github.io/CV/Resume.pdf" type="application/pdf" />
+
+        <div style="padding: 20px; color: white; text-align: center; font-family: sans-serif;">
+            <p>It looks like your browser doesn't support embedded PDFs.</p>
+            <a href="https://gabrielyusp.github.io/CV/Resume.pdf" 
+               style="color: #00bcff; text-decoration: none; font-weight: bold;">
+               Click here to download and view the Resume
+            </a>
+        </div>
+    </object>
 
 </body>
 </html>
