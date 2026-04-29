@@ -13,6 +13,42 @@
             width: 100%;
             overflow: hidden; /* Prevents double scrollbars */
             background-color: #525659; /* Matches the default PDF viewer background */
+            font-family: sans-serif;
+        }
+
+        /* Floating buttons at the top of the screen */
+        .button-container {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #00bcff;
+            padding: 8px 16px;
+            border-radius: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .toggle-btn:hover {
+            background-color: rgba(0, 188, 255, 0.2);
+        }
+
+        .toggle-btn.active {
+            background-color: #00bcff;
+            color: #121212;
         }
 
         #pdf-container {
@@ -24,21 +60,56 @@
 </head>
 <body>
 
+    <div class="button-container">
+        <button class="toggle-btn active" id="btn-canva" onclick="switchPDF('canva')">Visual Version</button>
+        <button class="toggle-btn" id="btn-ats" onclick="switchPDF('ats')">ATS-Friendly Version</button>
+    </div>
+
     <object 
-        data="https://gabrielyusp.github.io/CV/Resume.pdf" 
+        data="https://gabrielyusp.github.io/CV/Canva_Resume.pdf" 
         type="application/pdf" 
         id="pdf-container">
         
-        <embed src="https://gabrielyusp.github.io/CV/Resume.pdf" type="application/pdf" />
+        <embed id="pdf-embed" src="https://gabrielyusp.github.io/CV/Canva_Resume.pdf" type="application/pdf" />
 
-        <div style="padding: 20px; color: white; text-align: center; font-family: sans-serif;">
+        <div style="padding: 100px 20px 20px 20px; color: white; text-align: center;">
             <p>It looks like your browser doesn't support embedded PDFs.</p>
-            <a href="https://gabrielyusp.github.io/CV/Resume.pdf" 
+            <a id="fallback-link" href="https://gabrielyusp.github.io/CV/Canva_Resume.pdf" 
                style="color: #00bcff; text-decoration: none; font-weight: bold;">
                Click here to download and view the Resume
             </a>
         </div>
     </object>
+
+    <script>
+        // Define your PDF links here. Make sure you upload the Canva one to your repository!
+        const canvaPDF = "https://gabrielyusp.github.io/CV/Canva_Resume.pdf"; 
+        const atsPDF = "https://gabrielyusp.github.io/CV/Resume.pdf";
+
+        function switchPDF(type) {
+            const pdfContainer = document.getElementById('pdf-container');
+            const pdfEmbed = document.getElementById('pdf-embed');
+            const fallbackLink = document.getElementById('fallback-link');
+            const btnAts = document.getElementById('btn-ats');
+            const btnCanva = document.getElementById('btn-canva');
+
+            if (type === 'canva') {
+                pdfContainer.data = canvaPDF;
+                pdfEmbed.src = canvaPDF;
+                fallbackLink.href = canvaPDF;
+                
+                btnCanva.classList.add('active');
+                btnAts.classList.remove('active');
+            } else {
+                pdfContainer.data = atsPDF;
+                pdfEmbed.src = atsPDF;
+                fallbackLink.href = atsPDF;
+                
+                btnAts.classList.add('active');
+                btnCanva.classList.remove('active');
+            }
+        }
+    </script>
 
 </body>
 </html>
